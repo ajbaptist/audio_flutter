@@ -2,6 +2,7 @@ import 'package:audio_flutter/controller/HomeScreenController/home_controller.da
 import 'package:audio_flutter/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+ 
 
 import '../../services/firebase_service.dart';
 import '../../utils/config.dart';
@@ -53,21 +54,23 @@ class _HomeState extends State<Home> {
                 ),
                 trailing: GestureDetector(
                     onTap: () async {
-                      AppConfig.ShowLoading(notDisable: false);
+                   
+                       AppConfig.ShowLoading(notDisable: false);
                       await FirebaseService.addToFav(data);
                       Get.back();
                       homeController.fetchAudio();
                     },
                     child: isFav.isFalse
-                        ? const Icon(Icons.favorite)
-                        : const Icon(
+                        ? Icon(Icons.favorite)
+                        : Icon(
                             Icons.favorite,
                             color: Colors.red,
                           )),
               );
             },
           );
-        } else if (homeController.homeList.isEmpty &&
+        }
+        else if (homeController.homeList.isEmpty &&
             homeController.isNull.isFalse) {
           return const Center(child: Text('You Have No Song List'));
         } else {
